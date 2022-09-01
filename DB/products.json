@@ -1,0 +1,17 @@
+[
+  {
+    "producto": "mouse",
+    "precio": "100",
+    "img": "https://snpi.dell.com/snp/images/products/large/es-ar~570-AALK/570-AALKr1.jpg"
+  },
+  {
+    "producto": "teclado",
+    "precio": "120",
+    "img": "https://ar-media.hptiendaenlinea.com/catalog/product/cache/b3b166914d87ce343d4dc5ec5117b502/2/U/2UN30AA-1_T1638827506.png"
+  },
+  {
+    "producto": "parlantes",
+    "precio": "800",
+    "img": "https://www.megga.com.ar/img_fotos_productos/01051256_04PerroFucsia.jpg"
+  }
+]

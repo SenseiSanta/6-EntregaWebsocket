@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Entrega Websocket </title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+    {{{body}}}
+
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        socket.on('from-server-message', mensajes =>{
+            console.log(mensajes)
+            render(mensajes)
+        })
+
+
+        function render(mensajes) {
+            const cuerpoMensaje = mensajes.map(msg => {
+                return `<span> <span class="author">${msg.author}</span> <span class="fecha"> ${msg.date}</span>: <span class="mensaje">${msg.text}</span></span>`
+            }).join('')
+            document.querySelector('#chatHistorial').innerHTML = cuerpoMensaje;
+        }
+
+        function enviarMensaje() {
+            const inputEmail = document.querySelector('#email')
+            if (inputEmail.value.length == 0) {
+                alert('Falta mail')
+                return
+            }
+            const inputMsg = document.querySelector('#comentario')
+            const fecha = new Date().toLocaleString('es-AR')
+
+            const mensaje = {
+                author: inputEmail.value,
+                text: inputMsg.value,
+                date: fecha
+            }
+            socket.emit('from-client-message', mensaje);
+        }                  
+        
+    </script>
+</body>
+</html>
