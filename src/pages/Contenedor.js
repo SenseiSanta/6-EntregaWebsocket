@@ -5,19 +5,10 @@ class Contenedor {
         this.archivo = archivo;
     }
 
-    addId(arr) {
-        for (let i = 0; i < arr.length; i++) {
-            arr[i].id = i+1;
-        }
-        return arr
-    }
-
     async getAll () {
         try {
             const objs = JSON.parse(await fs.readFile(this.archivo, 'utf-8'), null, 2);
-            const objsWiD = objs;
-            this.addId(objsWiD)
-            return objsWiD;
+            return objs;
         }
         catch(error) {
             console.log(error)
@@ -27,10 +18,22 @@ class Contenedor {
     async save(obj) {
         try {
             const objs = JSON.parse(await fs.readFile(this.archivo, 'utf-8'), null, 2);
-            objs.push(obj)
-             
+            const fecha = new Date().toLocaleString('es-AR')
+            let newId
+            if (objs.length == 0) {
+                newId = 1
+            } else {
+                newId = objs[objs.length -1].id + 1
+            }
+
+            const newObj = { id: newId, timestamp: fecha, ...obj}
+            objs.push(newObj)
+
             await fs.writeFile(this.archivo, JSON.stringify(objs, null, 2))
-            return 'Aniadido con exito';
+            return {
+                status: 'Aniadido con exito',
+                id: newObj.id
+            };
 
         } catch (error) {
             console.log(error)
@@ -40,63 +43,100 @@ class Contenedor {
     async getById(id) {
         try {
             const objs = JSON.parse(await fs.readFile(this.archivo, 'utf-8'), null, 2);
-            const objsWiD = JSON.parse(await fs.readFile(this.archivo, 'utf-8'), null, 2);
-            this.addId(objsWiD);
-            const indexObj = objsWiD.findIndex((o)=> o.id == id);
+            const indexObj = objs.findIndex((o)=> o.id == id);
 
             if (indexObj == -1) {
                 throw new Error('Objeto no encontrado, intente con otro numero de identificacion')
             } 
-            return objsWiD[indexObj];
+            return objs[indexObj];
 
         } catch (error) {
             console.log(error)
-            return {error: 'Producto no encontrado'}
+            return {error: 'Objeto no encontrado'}
         }
     }
 
     async deleteById(id) {
         try {
             const objs = JSON.parse(await fs.readFile(this.archivo, 'utf-8'), null, 2);
-            const objsWiD = JSON.parse(await fs.readFile(this.archivo, 'utf-8'), null, 2);
-            this.addId(objsWiD);
-            const indexObj = objsWiD.findIndex((o)=> o.id == id);
+            const indexObj = objs.findIndex((o)=> o.id == id);
             
             if (indexObj == -1) {
                 throw new Error('Objeto no encontrado, intente con otro numero de identificacion')
             } else {
                 objs.splice(indexObj, 1)
             }
-            console.log(objs)
 
             await fs.writeFile(this.archivo, JSON.stringify(objs, null, 2))
             return true
+
         } catch (error) {
             console.log(error)
             return false
         }
     }
 
-    async updateById(id, producto, precio, img) {
+    async updateCart(obj, id) {
         try {
             const objs = JSON.parse(await fs.readFile(this.archivo, 'utf-8'), null, 2);
-            const objsWiD = JSON.parse(await fs.readFile(this.archivo, 'utf-8'), null, 2);
-            this.addId(objsWiD);
-            const indexObj = objsWiD.findIndex((o)=> o.id == id);
+            const indexObj = objs.findIndex((o)=> o.id == id);
+            objs[indexObj] = obj
+
+            await fs.writeFile(this.archivo, JSON.stringify(objs, null, 2))
+            return {
+                status: 'Aniadido con exito',
+                carrito: objs.id
+            };
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async updateById(id, producto, descripcion, codigo, stock, precio, img) {
+        try {
+            const objs = JSON.parse(await fs.readFile(this.archivo, 'utf-8'), null, 2);
+            const indexObj = objs.findIndex((o)=> o.id == id);
             
             if (indexObj == -1) {
                 throw new Error('Objeto no encontrado, intente con otro numero de identificacion')
             } else {
                 objs[indexObj].producto = producto;
+                objs[indexObj].descripcion = descripcion;
+                objs[indexObj].codigo = codigo;
+                objs[indexObj].stock = stock;
                 objs[indexObj].precio = precio;
                 objs[indexObj].img = img;
             }
-            console.log(objs)
 
             await fs.writeFile(this.archivo, JSON.stringify(objs, null, 2))
+            
             return true
 
         } catch (error) {
+            console.log(error)
+            return false
+        }
+    }
+
+    async deleteProductById (carrito, producto) {
+        try{
+            const objs = JSON.parse(await fs.readFile(this.archivo, 'utf-8'), null, 2);
+            const indexObj = objs.findIndex((o)=> o.id == carrito.id);
+    
+            if (indexObj == -1) {
+                throw new Error('Objeto no encontrado, intente con otro numero de identificacion')
+            } else if (objs[indexObj].productos) {
+                const indexProd = carrito.productos.findIndex((o)=> o.id == producto.id);
+                objs[indexObj].productos.splice(indexProd, 1)
+            } else {
+                throw new Error('El carrito no tiene este producto')
+            }
+    
+            await fs.writeFile(this.archivo, JSON.stringify(objs, null, 2))
+            return true
+        }
+        catch(error) {
             console.log(error)
             return false
         }

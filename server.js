@@ -2,23 +2,28 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const morgan = require('morgan')
 const Contenedor = require('./src/pages/Contenedor')
 const { Server: Httpserver } = require('http')
 const { Server: Ioserver } = require('socket.io')
 
-/*======= Instancia de Server y contenedor =======*/
+
+/*=== Instancia de Server, contenedor y rutas ===*/
 const app = express();
 const httpServer = new Httpserver(app)
 const io = new Ioserver(httpServer)
-const cajaProductos = new Contenedor('./DB/products.json');
 const cajaMensajes = new Contenedor('./DB/messages.json');
+const routerProductos = require('./src/routes/productos.routes.js')
+const routerCarritos = require('./src/routes/carritos.routes.js')
+const routerInitial = require('./src/routes/initial.routes.js')
 
-/*================= Base de datos =================*/
 
 /*================= Middlewears =================*/
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static('./public'))
+app.use(morgan('dev'))
+app.use(express.static(__dirname + './public'))
+
 
 /*============= Motor de plantillas =============*/
 app.engine('hbs', exphbs.engine({
@@ -30,20 +35,13 @@ app.engine('hbs', exphbs.engine({
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
 
+
 /*==================== Rutas ====================*/
-
-app.get('/', async (req, res) => {
-    const DB_PRODUCTOS = await cajaProductos.getAll()
-    res.render('vista', {DB_PRODUCTOS})
-})
-
-app.post('/', async (req, res) => {
-    console.log(await cajaProductos.save(req.body)) 
-    res.redirect('/')
-})
-
-app.get('*', (req, res) => {
-    res.send('url erronea')
+app.use('/', routerInitial)
+app.use('/api/productos', routerProductos);
+app.use('/api/carrito', routerCarritos);
+app.use('*', (req, res) => {
+    res.send({error: 'Producto no encontrado'})
 })
 
 /*================== Servidor ==================*/

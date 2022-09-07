@@ -1,0 +1,48 @@
+[
+  {
+    "id": 1,
+    "timestamp": "7/9/2022 16:15:27",
+    "productos": []
+  },
+  {
+    "id": 2,
+    "timestamp": "7/9/2022 16:19:47",
+    "productos": []
+  },
+  {
+    "id": 3,
+    "timestamp": "7/9/2022 16:20:11",
+    "productos": [
+      {
+        "id": 1,
+        "timestamp": "7/9/2022 16:12:11",
+        "producto": "mouse",
+        "descripcion": "mouse con cable x2mts gamer",
+        "codigo": "12345",
+        "precio": "100",
+        "stock": "18",
+        "img": "https://snpi.dell.com/snp/images/products/large/es-ar~570-AALK/570-AALKr1.jpg"
+      },
+      {
+        "id": 1,
+        "timestamp": "7/9/2022 16:12:11",
+        "producto": "mouse",
+        "descripcion": "mouse con cable x2mts gamer",
+        "codigo": "12345",
+        "precio": "100",
+        "stock": "18",
+        "img": "https://snpi.dell.com/snp/images/products/large/es-ar~570-AALK/570-AALKr1.jpg"
+      },
+      {
+        "id": 1,
+        "timestamp": "7/9/2022 16:12:11",
+        "producto": "mouse",
+        "descripcion": "mouse con cable x2mts gamer",
+        "codigo": "12345",
+        "precio": "100",
+        "stock": "18",
+        "img": "https://snpi.dell.com/snp/images/products/large/es-ar~570-AALK/570-AALKr1.jpg"
+      }
+    ]
+  }
+]
