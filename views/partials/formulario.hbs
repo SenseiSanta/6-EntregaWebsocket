@@ -2,7 +2,7 @@
 <!-- Formulario -->
     <h1 style="color:blue;">Ingrese datos</h1>
     <br>
-    <form action="/" method="post">
+    <form action="" id="formularioProd">
         <div class="form-group">
             <label for="producto"><b>Producto</b></label>
             <input id="producto" class="form-control" type="text" name="producto">
@@ -15,7 +15,7 @@
             <label for="img"><b>Imagen</b></label>
             <input id="img" class="form-control" type="text" name="img">
         </div>
-        <button class="btn btn-success mt-3 mb-5">Enviar</button>
+        <button type="button" onclick="enviarProducto()" class="btn btn-success">Enviar</button>
     </form>
     <!-- Final Formulario -->
 </div>

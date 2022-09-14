@@ -76,24 +76,7 @@ class Contenedor {
         }
     }
 
-    async updateCart(obj, id) {
-        try {
-            const objs = JSON.parse(await fs.readFile(this.archivo, 'utf-8'), null, 2);
-            const indexObj = objs.findIndex((o)=> o.id == id);
-            objs[indexObj] = obj
-
-            await fs.writeFile(this.archivo, JSON.stringify(objs, null, 2))
-            return {
-                status: 'Aniadido con exito',
-                carrito: objs.id
-            };
-
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    async updateById(id, producto, descripcion, codigo, stock, precio, img) {
+    async updateById(id, producto, precio, img) {
         try {
             const objs = JSON.parse(await fs.readFile(this.archivo, 'utf-8'), null, 2);
             const indexObj = objs.findIndex((o)=> o.id == id);
@@ -102,9 +85,6 @@ class Contenedor {
                 throw new Error('Objeto no encontrado, intente con otro numero de identificacion')
             } else {
                 objs[indexObj].producto = producto;
-                objs[indexObj].descripcion = descripcion;
-                objs[indexObj].codigo = codigo;
-                objs[indexObj].stock = stock;
                 objs[indexObj].precio = precio;
                 objs[indexObj].img = img;
             }
@@ -114,29 +94,6 @@ class Contenedor {
             return true
 
         } catch (error) {
-            console.log(error)
-            return false
-        }
-    }
-
-    async deleteProductById (carrito, producto) {
-        try{
-            const objs = JSON.parse(await fs.readFile(this.archivo, 'utf-8'), null, 2);
-            const indexObj = objs.findIndex((o)=> o.id == carrito.id);
-    
-            if (indexObj == -1) {
-                throw new Error('Objeto no encontrado, intente con otro numero de identificacion')
-            } else if (objs[indexObj].productos) {
-                const indexProd = carrito.productos.findIndex((o)=> o.id == producto.id);
-                objs[indexObj].productos.splice(indexProd, 1)
-            } else {
-                throw new Error('El carrito no tiene este producto')
-            }
-    
-            await fs.writeFile(this.archivo, JSON.stringify(objs, null, 2))
-            return true
-        }
-        catch(error) {
             console.log(error)
             return false
         }

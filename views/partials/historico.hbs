@@ -3,17 +3,8 @@
 
     {{#if DB_PRODUCTOS}}
     <div class="table-responsive">
-        <table class="table table-dark">
-            <tr style="color: yellow;"> <th>Producto</th> <th>Precio</th> <th>Imagen</th> </tr>
-            {{#each DB_PRODUCTOS}}
-            <tr>
-                <td>{{this.producto}}</td>
-                <td>{{this.precio}}</td>
-                <td>
-                    <img width="30px" src={{this.img}} alt="Prod. img">
-                </td>
-            </tr>
-            {{/each}}
+        <table class="table table-dark" id="product_table">
+    
         </table>
     </div>
     {{else}}

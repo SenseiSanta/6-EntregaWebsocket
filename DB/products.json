@@ -3,30 +3,28 @@
     "id": 1,
     "timestamp": "7/9/2022 16:12:11",
     "producto": "mouse",
-    "descripcion": "mouse con cable x2mts gamer",
-    "codigo": "12345",
     "precio": "100",
-    "stock": "18",
     "img": "https://snpi.dell.com/snp/images/products/large/es-ar~570-AALK/570-AALKr1.jpg"
   },
   {
     "id": 2,
     "timestamp": "7/9/2022 16:13:38",
     "producto": "impresora",
-    "descripcion": "impresora WiFi mod HG-300",
-    "codigo": "12345",
     "precio": "800",
-    "stock": "10",
     "img": "https://http2.mlstatic.com/D_NQ_NP_850549-MLA48196101439_112021-O.jpg"
   },
   {
     "id": 3,
     "timestamp": "7/9/2022 16:15:25",
     "producto": "teclado",
-    "descripcion": "teclado membrana retroluminado qwerty PadNum",
-    "codigo": "12345",
     "precio": "200",
-    "stock": "20",
     "img": "https://ar-media.hptiendaenlinea.com/catalog/product/cache/b3b166914d87ce343d4dc5ec5117b502/2/U/2UN30AA-1_T1638827506.png"
+  },
+  {
+    "id": 4,
+    "timestamp": "14/9/2022 16:46:15",
+    "producto": "parlantes",
+    "precio": "800",
+    "img": "https://www.megga.com.ar/img_fotos_productos/01051256_04PerroFucsia.jpg"
   }
 ]

@@ -9,12 +9,13 @@ const caja = new Contenedor('DB/products.json');
 /* ============= Routing y metodos ============= */
 routerInitial.get('/', async (req, res) => {
     const DB_PRODUCTOS = await caja.getAll()
-    res.render('vista', {DB_PRODUCTOS})
+    const DB_MENSAJES = await caja.getAll()
+    res.render('vista', {DB_PRODUCTOS, DB_MENSAJES})
 })
 
 routerInitial.post('/', async (req, res) => {
-    console.log(await caja.save(req.body)) 
-    res.redirect('/')
+    const DB_PRODUCTOS = await caja.getAll()
+    res.render('vista', {DB_PRODUCTOS})
 })
 
 /* ============= Error de Routing ============= */

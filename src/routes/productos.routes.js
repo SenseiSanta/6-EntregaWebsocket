@@ -5,7 +5,6 @@ const Contenedor = require('../pages/Contenedor.js')
 
 /* ============ Creacion de objeto ============ */
 const caja = new Contenedor('DB/products.json');
-const admin = true;
 
 /* ============= Routing y metodos ============= */
 routerProductos.get('/', async (req, res) => {
