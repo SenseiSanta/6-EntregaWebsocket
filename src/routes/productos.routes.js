@@ -18,8 +18,8 @@ routerProductos.get('/:id', async (req, res) => {
 
 routerProductos.put('/:id', async (req, res) => {
     const id = parseInt(req.params['id']);
-    let { producto, descripcion, codigo, stock, precio, img } = req.body;
-    const actualizado = await caja.updateById(id, producto, descripcion, codigo, stock, precio, img)
+    let { producto, precio, img } = req.body;
+    const actualizado = await caja.updateById(id, producto, precio, img)
     if (actualizado) {
         res.status(201).json({msg: 'Actualizado con exito', data: req.body});
     } else {

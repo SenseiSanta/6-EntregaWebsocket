@@ -26,5 +26,12 @@
     "producto": "parlantes",
     "precio": "800",
     "img": "https://www.megga.com.ar/img_fotos_productos/01051256_04PerroFucsia.jpg"
+  },
+  {
+    "id": 5,
+    "timestamp": "22/9/2022 01:04:47",
+    "producto": "monitor",
+    "precio": "660",
+    "img": "https://http2.mlstatic.com/D_NQ_NP_973781-MLA48131216539_112021-O.webp"
   }
 ]

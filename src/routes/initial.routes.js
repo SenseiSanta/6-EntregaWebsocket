@@ -13,11 +13,6 @@ routerInitial.get('/', async (req, res) => {
     res.render('vista', {DB_PRODUCTOS, DB_MENSAJES})
 })
 
-routerInitial.post('/', async (req, res) => {
-    const DB_PRODUCTOS = await caja.getAll()
-    res.render('vista', {DB_PRODUCTOS})
-})
-
 /* ============= Error de Routing ============= */
 routerInitial.get('*', (req, res) => {
     res.status(404).json({ error : -2, descripcion: `ruta ${req.path} método ${req.method} no implementado`})
